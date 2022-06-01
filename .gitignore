@@ -1,1 +1,2 @@
-/Users/miloschmiessek/Documents/Milo/Web\ development/movie_api-main/node_modules
+*/node_modules
+*/.DS_Store
