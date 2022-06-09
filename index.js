@@ -22,7 +22,7 @@ app.use(express.static('public'));
 
 //Endpoints
 app.get('/', (req, res) => {
-  res.send('Welcome to myFlix!');
+  res.send('Welcome to Milos Movie APP!');
 });
 
 app.get('/movies', (req, res) => {
