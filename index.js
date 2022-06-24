@@ -60,7 +60,7 @@ let movieList = [
 
 // GET requests
 app.get('/', (req, res) => {
-  res.send('<h1>Welcome to the Movie Database</h1>');
+  res.send('<h1>Welcome to Milos Movie APP!</h1>');
 } );
 
 // serves documentation.html
