@@ -65,7 +65,7 @@ app.use(express.static('public'));
 //Endpoints
 // GET requests
 app.get('/', (req, res) => {
-  res.send('<h1>Welcome to Milos Movie APP!</h1>');
+  res.send('Welcome to Milos Movie APP!');
 } );
 
 // GET a list of ALL movies to the user
