@@ -58,16 +58,15 @@ let movieList = [
   }
 ];
 
+//Middleware functions
+app.use(morgan('common'));
+app.use(express.static('public'));
 
+//Endpoints
 // GET requests
 app.get('/', (req, res) => {
   res.send('<h1>Welcome to Milos Movie APP!</h1>');
 } );
-
-// serves documentation.html
-app.use(express.static('public'));
-
-app.use(morgan('common'));
 
 // GET a list of ALL movies to the user
 app.get('/movies', (req, res) => {
@@ -113,6 +112,11 @@ app.delete('/users/username/movies/movieName', (req, res) => {
 app.delete('/users/username', (req, res) => {
   res.send('Allow existing users to deregister (showing only a text that a user email has been removed)');
 });
+//Error handling
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+
 //Listening for port 8080
 app.listen(8080, () => {
   console.log('Your app is listening on port 8080.');
