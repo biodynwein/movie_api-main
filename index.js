@@ -1,32 +1,76 @@
 //Import Express & Morgan
 const express = require('express'),
   morgan = require('morgan');
-
 const app = express();
 
-let topTenMovies = [
+// JSON movie list
+let movieList = [
   {
-    title: 'Equilibrium',
+      movie: 'Timer',
+      director: 'Jac Schaeffer',
+      genre: 'Romatic Comedy'
   },
   {
-    title: 'Lords of Dogtown',
+      movie: 'Baby Driver',
+      director: 'Edgar Wright',
+      genre: 'Action'
   },
   {
-    title: 'Lost Highway',
+      movie: 'Frequencies',
+      director: 'Darren Paul Fisher',
+      genre: 'Mystery'
+  },
+  {
+      movie: 'The Grand Budapest Hotel',
+      director: 'Wes Anderson',
+      genre: 'Adventure'
+  },
+  {
+      movie: 'Incident in a Ghostland',
+      director: 'Pascal Laugier',
+      genre: 'Horror'
+  },
+  {
+      movie: 'What We Do in the Shadows',
+      director: 'Jermaine Clement',
+      genre: 'Comedy'
+  },
+  {
+      movie: 'It Follows',
+      director: 'David Robert Mitchell',
+      genre: 'Horror'
+  },
+  {
+      movie: 'La La Land',
+      director: 'Damien Chazelle',
+      genre: 'Muscial Comedy'
+  },
+  {
+      movie: 'Everything Everything',
+      director: 'Stella Meghie',
+      genre: 'Drama'
+  },
+  {
+      movie: 'The Call',
+      director: 'Chung-Hyun Lee',
+      genre: 'Horror'
   }
 ];
 
-//Middleware functions
-app.use(morgan('common'));
+
+// GET requests
+app.get('/', (req, res) => {
+  res.send('<h1>Welcome to the Movie Database</h1>');
+} );
+
+// serves documentation.html
 app.use(express.static('public'));
 
-//Endpoints
-app.get('/', (req, res) => {
-  res.send('Welcome to Milos Movie APP!');
-});
+app.use(morgan('common'));
 
+// GET a list of ALL movies to the user
 app.get('/movies', (req, res) => {
-  res.json(topTenMovies);
+  res.json(movieList);
 });
 
 // GET data about a single movie by title to the user
@@ -44,14 +88,31 @@ app.get('/movies/directors/name', (req, res) => {
   res.send('Return data about a director (bio, birth year, death year) by name');
 });
 
-
-//Error handling
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
+// POST new users to register
+app.post('/users', (req, res) => {
+  res.send('Allow new users to register');
 });
 
-//Listening for port 8080
-app.listen(8080, () => {
-  console.log('Your app is listening on port 8080.');
+// PUT updated to username
+app.put('/users/username', (req, res) => {
+  res.send('Allow users to update their user info (username)');
 });
+
+// POST movie to user's favorites list
+app.post('/users/username/movies/movieName', (req, res) => {
+  res.send('Allow users to add a movie to their list of favorites (showing only a text that a movie has been added)');
+});
+
+// DELETE movie from user's favorites list
+app.delete('/users/username/movies/movieName', (req, res) => {
+  res.send('Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed)');
+});
+
+// DELETE a user from registration database
+app.delete('/users/username', (req, res) => {
+  res.send('Allow existing users to deregister (showing only a text that a user email has been removed)');
+});
+
+// listen for requests
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
