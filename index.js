@@ -1,6 +1,7 @@
 //Import Express & Morgan
 const express = require('express'),
   morgan = require('morgan');
+  
 const app = express();
 
 // JSON movie list
@@ -112,7 +113,6 @@ app.delete('/users/username/movies/movieName', (req, res) => {
 app.delete('/users/username', (req, res) => {
   res.send('Allow existing users to deregister (showing only a text that a user email has been removed)');
 });
-
-// listen for requests
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+//Listening for port 8080
+app.listen(8080, () => {
+  console.log('Your app is listening on port 8080.');
