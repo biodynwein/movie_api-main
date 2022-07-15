@@ -1,5 +1,5 @@
 //Import Express & Morgan
-const express = require('express'),
+const express = require('express');
 const bodyParser = require('body-parser');
   morgan = require('morgan');
 
@@ -17,61 +17,6 @@ mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-
-// JSON movie list
-let movieList = [
-  {
-      movie: 'Timer',
-      director: 'Jac Schaeffer',
-      genre: 'Romatic Comedy'
-  },
-  {
-      movie: 'Baby Driver',
-      director: 'Edgar Wright',
-      genre: 'Action'
-  },
-  {
-      movie: 'Frequencies',
-      director: 'Darren Paul Fisher',
-      genre: 'Mystery'
-  },
-  {
-      movie: 'The Grand Budapest Hotel',
-      director: 'Wes Anderson',
-      genre: 'Adventure'
-  },
-  {
-      movie: 'Incident in a Ghostland',
-      director: 'Pascal Laugier',
-      genre: 'Horror'
-  },
-  {
-      movie: 'What We Do in the Shadows',
-      director: 'Jermaine Clement',
-      genre: 'Comedy'
-  },
-  {
-      movie: 'It Follows',
-      director: 'David Robert Mitchell',
-      genre: 'Horror'
-  },
-  {
-      movie: 'La La Land',
-      director: 'Damien Chazelle',
-      genre: 'Muscial Comedy'
-  },
-  {
-      movie: 'Everything Everything',
-      director: 'Stella Meghie',
-      genre: 'Drama'
-  },
-  {
-      movie: 'The Call',
-      director: 'Chung-Hyun Lee',
-      genre: 'Horror'
-  }
-];
 
 //Middleware functions
 app.use(morgan('common'));
