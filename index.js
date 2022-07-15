@@ -28,9 +28,11 @@ app.get('/', (req, res) => {
   res.send('Welcome to Milos Movie APP!');
 } );
 
-// GET a list of ALL movies to the user
+// GET a list of ALL movies to the user - Work to Do 
 app.get('/movies', (req, res) => {
   res.json(movieList);
+
+
 });
 
 // GET data about a single movie by title to the user
