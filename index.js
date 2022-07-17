@@ -42,12 +42,15 @@ app.get("/movies", function (req, res) {
 
 // GET data about a single movie by title to the user
 app.get('/movies/title', (req, res) => {
-  res.send('Return a list of ALL movies to the user');
-});
-
-// GET data about a genre by name/title
-app.get('/movies/genres/title', (req, res) => {
-  res.send('Return data about a genre (description) by name/title (e.g., “Thriller”)');
+  Movies.findOne({ title: req.params.title })
+  .then((title) => {
+    res.json(title);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });
+  
 });
 
 // GET data about a director by name
@@ -99,6 +102,7 @@ app.listen(8080, () => {
   Email: String,
   Birthday: Date
 }*/
+// 
 app.post('/users', (req, res) => {
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
