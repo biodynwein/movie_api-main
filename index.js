@@ -28,12 +28,54 @@ app.get('/', (req, res) => {
   res.send('Welcome to Milos Movie APP!');
 } );
 
-// GET a list of ALL movies to the user - Work to Do 
-app.get('/movies', (req, res) => {
-  res.json(movieList);
-
-
+//Display all movies
+app.get("/movies", function (req, res) {
+  Movies.find()
+    .then(function (movies) {
+      res.status(201).json(movies);
+    })
+    .catch(function (error) {
+      console.error(error);
+      res.status(500).send("Error: " + error);
+    });
 });
+
+  //Display single movie
+app.get('/movies/:Title', passport.authenticate('jwt', {session: false}), (req, res) => {
+    Movies.findOne({ Title: req.params.Title })
+      .then((movie) => {
+        res.json(movie);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      });
+    });
+
+    //Display Genre
+    app.get('/movies/genre/:name', passport.authenticate('jwt', {session: false}), (req, res) => {
+        Movies.find({ 'Genre.Name' : req.params.name })
+          .then((genre) => {
+            res.status(201).json(genre)
+          })
+          .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+          });
+      });
+
+
+    //Display Director ddata
+    app.get('/movies/director/:Name', passport.authenticate('jwt', {session: false}), (req, res) => {
+        Movies.find({ 'Director.Name': req.params.Name })
+          .then((director) => {
+            res.json(director);
+          })
+          .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+          });
+        });
 
 // GET data about a single movie by title to the user
 app.get('/movies/title', (req, res) => {
