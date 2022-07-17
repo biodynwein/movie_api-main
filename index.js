@@ -40,43 +40,6 @@ app.get("/movies", function (req, res) {
     });
 });
 
-  //Display single movie
-app.get('/movies/:Title', passport.authenticate('jwt', {session: false}), (req, res) => {
-    Movies.findOne({ Title: req.params.Title })
-      .then((movie) => {
-        res.json(movie);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.status(500).send('Error: ' + err);
-      });
-    });
-
-    //Display Genre
-    app.get('/movies/genre/:name', passport.authenticate('jwt', {session: false}), (req, res) => {
-        Movies.find({ 'Genre.Name' : req.params.name })
-          .then((genre) => {
-            res.status(201).json(genre)
-          })
-          .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
-          });
-      });
-
-
-    //Display Director ddata
-    app.get('/movies/director/:Name', passport.authenticate('jwt', {session: false}), (req, res) => {
-        Movies.find({ 'Director.Name': req.params.Name })
-          .then((director) => {
-            res.json(director);
-          })
-          .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
-          });
-        });
-
 // GET data about a single movie by title to the user
 app.get('/movies/title', (req, res) => {
   res.send('Return a list of ALL movies to the user');
