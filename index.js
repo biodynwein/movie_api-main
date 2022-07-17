@@ -42,45 +42,15 @@ app.get("/movies", function (req, res) {
 
 // GET data about a single movie by title to the user
 app.get('/movies/title', (req, res) => {
-  Movies.findOne({ title: req.params.title })
-  .then((title) => {
-    res.json(title);
+  Movies.findOne({ Title: req.params.Title })
+  .then((movie) => {
+    res.json(movie);
   })
   .catch((err) => {
     console.error(err);
     res.status(500).send('Error: ' + err);
   });
   
-});
-
-// GET data about a director by name
-app.get('/movies/directors/name', (req, res) => {
-  res.send('Return data about a director (bio, birth year, death year) by name');
-});
-
-// POST new users to register
-app.post('/users', (req, res) => {
-  res.send('Allow new users to register');
-});
-
-// PUT updated to username
-app.put('/users/username', (req, res) => {
-  res.send('Allow users to update their user info (username)');
-});
-
-// POST movie to user's favorites list
-app.post('/users/username/movies/movieName', (req, res) => {
-  res.send('Allow users to add a movie to their list of favorites (showing only a text that a movie has been added)');
-});
-
-// DELETE movie from user's favorites list
-app.delete('/users/username/movies/movieName', (req, res) => {
-  res.send('Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed)');
-});
-
-// DELETE a user from registration database
-app.delete('/users/username', (req, res) => {
-  res.send('Allow existing users to deregister (showing only a text that a user email has been removed)');
 });
 
 //Error handling
