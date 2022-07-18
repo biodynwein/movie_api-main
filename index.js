@@ -53,6 +53,19 @@ app.get('/movies/title', (req, res) => {
   
 });
 
+// GET data about a single movie by genre to the user
+app.get('/movies/genre', (req, res) => {
+  Movies.findOne({ Genre: req.params.Genre })
+  .then((movie) => {
+    res.json(movie);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });
+  
+});
+
 //Error handling
 app.use((err, req, res, next) => {
   console.error(err.stack);
