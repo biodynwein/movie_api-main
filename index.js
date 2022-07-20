@@ -17,6 +17,10 @@ mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
+
 
 //Middleware functions
 app.use(morgan('common'));
@@ -29,12 +33,12 @@ app.get('/', (req, res) => {
 } );
 
 //Display all movies
-app.get("/movies", function (req, res) {
+app.get("/movies", passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
-    .then(function (movies) {
+    .then((movies) => {
       res.status(201).json(movies);
     })
-    .catch(function (error) {
+    .catch((error) => {
       console.error(error);
       res.status(500).send("Error: " + error);
     });
