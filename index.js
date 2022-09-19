@@ -63,8 +63,8 @@ app.get("/movies", passport.authenticate('jwt', { session: false }), (req, res) 
 });
 
 // GET data about a single movie by title to the user
-app.get('/movies/:title', passport.authenticate('jwt', { session: false }), (req, res) => {
-  Movies.findOne({ title: req.params.title })
+app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Movies.findOne({ Title: req.params.Title })
   .then((movie) => {
     res.json(movie);
   })
@@ -76,8 +76,8 @@ app.get('/movies/:title', passport.authenticate('jwt', { session: false }), (req
 });
 
 // GET data about a single movie by genre to the user
-app.get('/movies/:genre', passport.authenticate('jwt', { session: false }), (req, res) => {
-  Movies.findOne({ genre: req.params.genre })
+app.get('/movies/:Genre', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Movies.findOne({ Genre: req.params.Genre })
   .then((movie) => {
     res.json(movie);
   })
